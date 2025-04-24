@@ -18,6 +18,24 @@ Scripts to monitor the MVO seismic data acquisition system.
 * Results stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/data_latency_wws*.
 * Results can be seen in *notWebobs*.
 
+## radian_log_files
+
+### radianLogFilesFetch.pl
+
+* Copies log files from all Radian stations.
+* IP addresses are in script.
+* Runs once a week (Thursday) as a cronjob on *opsproc3*.
+* Log files stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/seismic_stations/radian_log_files*.
+* MBLG removed from script as slow connection caused crashes.
+
+### radianLogFilesCheckTime.pl, radianLogFilesPlotTime.m
+
+* Checks time stamps in Radian log files.
+* Was used when MBFL was losing time at times every day.
+```
+$ ./radianLogFilesCheckTime.pl > MBFL-noClock.txt
+```
+* Matlab script *radianLogFilesPlotTime.m* plots the results.
 
 ## Author
 
