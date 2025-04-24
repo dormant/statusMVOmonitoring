@@ -6,7 +6,7 @@ Scripts to monitor the MVO seismic data acquisition system.
 
 * Scripts to calculate and plot the daily availability of data on the Winston waveserver.
 * *wws_da.sh* runs as a cronjob once a day, just after midnight UTC, on *opsproc3*.
-* Results stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/data_latency_wws*.
+* Results stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/data_availability_wws*.
 * Results can be seen in *notWebobs*.
 
 
