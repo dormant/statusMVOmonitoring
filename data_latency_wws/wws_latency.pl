@@ -17,7 +17,7 @@ my $datimEpoch = time();
 
 foreach my $station (@stations) {
 
-	open( OF, '>>', join( '/', '/mnt/mvofls2/Seismic_Data/monitoring_data/status/latencyWWS', join( '.', $station, '-winston1-latencyWWS.txt' ) ) ) or die "Can't open file: $!";
+	open( OF, '>>', join( '/', '/mnt/mvofls2/Seismic_Data/monitoring_data/status/data_latency_wws', join( '.', $station, '-winston1-data_latency_wws.txt' ) ) ) or die "Can't open file: $!";
 
 	foreach my $curly (@curlies) {
 
