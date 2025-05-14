@@ -6,14 +6,23 @@ Monitoring the MVO seismic data acquisition system.
 
 The directory *~/data/statusMVOmonitoring* should be present on all Linux computers using in MVO seismic monitoring.
 
-All files should be the same, except for those in the following subdirectories.
+The following subdirectories should be present and identical on all the computers.
+
+* config
+* src
+
+The following subdirectories should be present on all the computers, but the contents will differ.
 * data
 * logs
 * plots
-* reports
-* spreadsheets
 
-The contents of *data* are regularly synchronised one-way using rsync to */mnt/mvofls2/Seismic_Data/monitoring_data/status*.
+The following subdirectories are currently only on *opsproc3*.
+* reports
+* specificProblems
+* systemNotes
+* tests
+
+The contents of *data* on all the computers are regularly synchronised one-way using rsync to */mnt/mvofls2/Seismic_Data/monitoring_data/status*.
 ```
 */5 * * * * /usr/bin/rsync -a /home/wwsuser/data/statusMVOmonitoring/data/ /mnt/mvofls2/Seismic_Data/monitoring_data/status >/dev/null 2>&1
 22 0 1 * * /usr/bin/find /home/wwsuser/data/statusMVOmonitoring/data -type f -name '*.txt' -mtime +28 -exec rm -f {} \; > /dev/null 2>&1
@@ -46,7 +55,7 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 
 #### earthworm_status.pl
 
-* Runs earthworm program *status* and saves output in file.
+* Runs earthworm program *status* and saves output in a text file.
 * Runs as cronjob by user *wwsuser* on every 5 minutes.
 ```
 # earthworm status
