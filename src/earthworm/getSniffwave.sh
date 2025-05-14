@@ -14,7 +14,7 @@ host=`hostname -s`
 
 source /home/wwsuser/earthworm/run_mvo/params/ew_linux.bash
 
-cd /home/wwsuser/src/statusMVOmonitoring/src/earthworm
+cd /home/wwsuser/data/statusMVOmonitoring/src/earthworm
 
 pkill sniffwave
 

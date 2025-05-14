@@ -6,13 +6,19 @@ Monitoring the MVO seismic data acquisition system.
 
 The directory *~/data/statusMVOmonitoring* should be present on all Linux computers using in MVO seismic monitoring.
 
-All files should be the same, except for those in the *data* and *logs* subdirectories.
+All files should be the same, except for those in the following subdirectories.
+* data
+* logs
+* plots
+* reports
+* spreadsheets
 
-The contents of *data* are regularly synchronised to */mnt/mvofls2/Seismic_Data/monitoring_data/status*.
-
+The contents of *data* are regularly synchronised one-way using rsync to */mnt/mvofls2/Seismic_Data/monitoring_data/status*.
+```
+*/5 * * * * /usr/bin/rsync -a /home/wwsuser/data/statusMVOmonitoring/data/ /mnt/mvofls2/Seismic_Data/monitoring_data/status >/dev/null 2>&1
+22 0 1 * * /usr/bin/find /home/wwsuser/data/statusMVOmonitoring/data -type f -name '*.txt' -mtime +28 -exec rm -f {} \; > /dev/null 2>&1
+```
 The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
-
-## Directories
 
 
 ## src
@@ -38,13 +44,30 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 * Scripts to monitor earthworm on a Linux computer.
 * Most run as cronjobs.
 
+#### earthworm_status.pl
+
+* Runs earthworm program *status* and saves output in file.
+* Runs as cronjob by user *wwsuser* on every 5 minutes.
+```
+# earthworm status
+*/5 * * * * /home/wwsuser/data/statusMVOmonitoring/src/earthworm/earthworm_status.pl > /mnt/mvofls2/Seismic_Data/monitoring_data/status/earthworm/status-winston1.txt 2>&1
+```
+
+#### getSniffwave.sh
+
+* Runs earthworm program *sniffwave* and stores output in daily text files.
+* Used to calculate data availability and latency.
+* Runs as cronjob by user *wwsuser* every day and at boot.
+```
+# statusMVOmonitoring
+0 0 * * * /home/wwsuser/data/statusMVOmonitoring/src/earthworm/getSniffwave.sh > /dev/null 2&>1
+
+@reboot /home/wwsuser/data/statusMVOmonitoring/src/earthworm/getSniffwave.sh > /dev/null 2&>1
+```
+
 #### scriptVariables.txt
 
 * Common variables for bash scripts
-
-#### earthworm_status.pl
-
-#### getSniffwave.sh
 
 ### radian_log_files
 
