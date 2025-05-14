@@ -15,9 +15,9 @@ chomp(my $hostname = `hostname -s`);
 
 my $hostSniff = "winston1";
 
-my $dirData1 = "/mnt/mvofls2/Seismic_Data/monitoring_data/statusMVOmonitoring/data";
-my $dirData2 = "../data";
-my $dirConfig = "../config";
+my $dirData1 = "/mnt/mvofls2/Seismic_Data/monitoring_data/status";
+my $dirData2 = "../../data";
+my $dirConfig = "../../config";
 
 # Get todays date and time
 my $rightNow = time();
@@ -44,7 +44,7 @@ for (my $iday = 0; $iday <= $daysBack; $iday++) {
 
             my $stacha = join( ".", $sta, $cha );
 
-            my $dirLatency = join( '/', $dirData2, 'latencySniffwave', $sta );
+            my $dirLatency = join( '/', $dirData2, 'data_latency_sniffwave', $sta );
             mkdir $dirLatency unless -d $dirLatency;
 
             my $fileLatency = join( '/', $dirLatency, join( '.', join( '-', $fileDate, $hostSniff ), 'txt' ) );

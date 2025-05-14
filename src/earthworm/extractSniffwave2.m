@@ -1,22 +1,23 @@
 % extract data rate and amount from sniffwave latency datafiles
 
 clear;
+tic
 
-%dirData = "/mnt/mvofls2/Seismic_Data/monitoring_data/statusMVOmonitoring/data/latencySniffwave";
-dirData = "../data";
+%dirData = "/mnt/mvofls2/Seismic_Data/monitoring_data/status";
+dirData = "../../data";
 
-dinfo = dir(fullfile(dirData,'latencySniffwave', 'M*'));
+dinfo = dir(fullfile(dirData,'data_latency_sniffwave', 'M*'));
 ncha = length( dinfo );
 
-rightNow = datetime("now") + hours(4);
+rightNow = datetime("now");
 
 for i = 1 : ncha
 
     dirinfoData = dinfo(i).name;
-    dirDataLatency = fullfile( dirData, 'latencySniffwave', dirinfoData );
+    dirDataLatency = fullfile( dirData, 'data_latency_sniffwave', dirinfoData );
     dinfo2 = dir(fullfile(dirDataLatency,'*.txt'));
 
-    fileTransferSniffwave = fullfile( dirData, 'transferSniffwave', sprintf( "%s-winston1.txt", dirinfoData ) );
+    fileTransferSniffwave = fullfile( dirData, 'data_transfer_sniffwave', sprintf( "%s-winston1.txt", dirinfoData ) );
     
     LL = [];
 
@@ -66,3 +67,5 @@ for i = 1 : ncha
 
 
 end
+
+toc

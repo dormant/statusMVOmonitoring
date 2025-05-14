@@ -60,6 +60,24 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 */5 * * * * /home/wwsuser/data/statusMVOmonitoring/src/earthworm/earthworm_status.pl > /mnt/mvofls2/Seismic_Data/monitoring_data/status/earthworm/status-winston1.txt 2>&1
 ```
 
+### extractSniffwave.pl
+
+* Calculates data latency from sniffwave data.
+* Runs once a day as cronjob on *opsproc3*.
+```
+40 1 * * * cd /home/seisan/data/statusMVOmonitoring/src/earthworm; ./extractSniffwave.pl >/home/seisan/data/statusMVOmonitoring/logs/extractSniffwave.log 2>&1
+```
+
+### extractSniffwave2.m
+
+* Calculates data transfer rate from sniffwave data.
+* Results stored in *data/data_transfer_sniffwave*.
+* Runs once a day as cronjob on *opsproc3*.
+```
+40 2 * * * /usr/local/bin/matlab -sd /home/seisan/data/statusMVOmonitoring/src/earthworm -batch extractSniffwave2 > /home/seisan/data/statusMVOmonitoring/logs/extractSniffwave2.log 2>&1
+```
+
+
 ### getSniffwave.sh
 
 * Runs earthworm program *sniffwave* and stores output in daily text files.
@@ -106,9 +124,13 @@ $ pkill ping
 
 * Copies log files from all Radian stations.
 * IP addresses are in script.
-* Runs once a week (Thursday) as a cronjob on *opsproc3*.
 * Log files stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/seismic_stations/radian_log_files*.
 * MBLG removed from script as slow connection caused crashes.
+* Runs once a week (Thursday) as a cronjob on *opsproc3*.
+```
+# Fetch log files from Radian stations
+30 8 * * Thu /home/seisan/data/statusMVOmonitoring/src/radian_log_files/radianLogFilesFetch.pl >> /home/seisan/data/statusMVOmonitoring/logs/radianLogFilesFetch.log 2>&1
+```
 
 ### radianLogFilesCheckTime.pl, radianLogFilesPlotTime.m
 
@@ -117,7 +139,7 @@ $ pkill ping
 ```
 $ ./radianLogFilesCheckTime.pl > MBFL-noClock.txt
 ```
-* Matlab script *radianLogFilesPlotTime.m* plots the results.
+* *MATLAB* script *radianLogFilesPlotTime.m* plots the results.
 
 ## Author
 
