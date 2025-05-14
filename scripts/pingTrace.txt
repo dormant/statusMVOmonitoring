@@ -1,0 +1,21 @@
+MBLG
+5 packets transmitted, 5 received, 0% packet loss, time 4064ms
+traceroute to 172.30.0.79 (172.30.0.79), 30 hops max, 60 byte packets
+ 1  _gateway (172.17.102.126)  2.749 ms  2.838 ms  2.940 ms
+ 2  10.5.5.235 (10.5.5.235)  2.449 ms  2.675 ms  2.897 ms
+ 3  mblg (172.30.0.79)  4860.750 ms  4861.220 ms  4948.589 ms
+
+MBHA
+5 packets transmitted, 5 received, 0% packet loss, time 4063ms
+traceroute to 172.30.0.12 (172.30.0.12), 30 hops max, 60 byte packets
+ 1  _gateway (172.17.102.126)  24.557 ms  24.673 ms  24.779 ms
+ 2  10.5.5.235 (10.5.5.235)  2.176 ms  2.430 ms  2.657 ms
+ 3  mbha (172.30.0.12)  0.795 ms  0.899 ms  0.963 ms
+
+MBRY
+5 packets transmitted, 5 received, 0% packet loss, time 4076ms
+traceroute to 172.30.0.11 (172.30.0.11), 30 hops max, 60 byte packets
+ 1  _gateway (172.17.102.126)  1.826 ms  2.326 ms  2.831 ms
+ 2  10.5.5.235 (10.5.5.235)  0.954 ms  1.526 ms  1.753 ms
+ 3  mbry (172.30.0.11)  0.917 ms  1.011 ms  1.161 ms
+
