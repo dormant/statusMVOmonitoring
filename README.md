@@ -30,9 +30,7 @@ The contents of *data* on all the computers are regularly synchronised one-way u
 The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 
 
-## src
-
-### data_availability_wws
+## src/data_availability_wws
 
 * Scripts to calculate and plot the daily availability of data on the Winston waveserver.
 * *wws_da.sh* runs as a cronjob once a day, just after midnight UTC, on *opsproc3*.
@@ -40,7 +38,7 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 * Results can be seen in *notWebobs*.
 
 
-### data_latency_wws
+## src/data_latency_wws
 
 * Scripts to calculate and plot the latency of data on the Winston waveserver.
 * Run as cronjobs on *opsproc3*.
@@ -48,12 +46,12 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 * Results stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/data_latency_wws*.
 * Results can be seen in *notWebobs*.
 
-### earthworm
+## src/earthworm
 
 * Scripts to monitor earthworm on a Linux computer.
 * Most run as cronjobs.
 
-#### earthworm_status.pl
+### earthworm_status.pl
 
 * Runs earthworm program *status* and saves output in a text file.
 * Runs as cronjob by user *wwsuser* on every 5 minutes.
@@ -62,7 +60,7 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 */5 * * * * /home/wwsuser/data/statusMVOmonitoring/src/earthworm/earthworm_status.pl > /mnt/mvofls2/Seismic_Data/monitoring_data/status/earthworm/status-winston1.txt 2>&1
 ```
 
-#### getSniffwave.sh
+### getSniffwave.sh
 
 * Runs earthworm program *sniffwave* and stores output in daily text files.
 * Used to calculate data availability and latency.
@@ -74,13 +72,37 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 @reboot /home/wwsuser/data/statusMVOmonitoring/src/earthworm/getSniffwave.sh > /dev/null 2&>1
 ```
 
-#### scriptVariables.txt
+### scriptVariables.txt
 
 * Common variables for bash scripts
 
-### radian_log_files
 
-#### radianLogFilesFetch.pl
+## src/ping
+
+* Test network using *ping*.
+* Use sparingly as it clogs the network.
+
+### pingFlood.pl
+
+* Runs *ping* intensely in the background for all machines listed in *config/servers.txt*.
+* Stop using
+```
+$ pkill ping
+```
+
+### pingFloodPlot.gp, pingFloodPlot.m
+
+* *Gnuplot* and *MATLAB* scripts to plot results of *pingFlood.pl*.
+* Run from command line, edited as needed.
+
+### pingTrace.pl
+
+* Runs *ping* and *traceroute* for all stations listed in *config/stations.txt*.
+* Run from command line.
+
+## src/radian_log_files
+
+### radianLogFilesFetch.pl
 
 * Copies log files from all Radian stations.
 * IP addresses are in script.
@@ -88,7 +110,7 @@ The data is accessible through *notWebobs*: http://webobs.mvo.ms:8080/.
 * Log files stored in */mnt/mvofls2/Seismic_Data/monitoring_data/status/seismic_stations/radian_log_files*.
 * MBLG removed from script as slow connection caused crashes.
 
-#### radianLogFilesCheckTime.pl, radianLogFilesPlotTime.m
+### radianLogFilesCheckTime.pl, radianLogFilesPlotTime.m
 
 * Checks time stamps in Radian log files.
 * Was used when MBFL was losing time at times every day.

@@ -11,8 +11,8 @@ use Time::Local;
 
 chomp(my $hostname = `hostname -s`);
 
-my $dirData = "../data";
-my $dirConfig = "../config";
+my $dirData = "../../data";
+my $dirConfig = "../../config";
 
 my $fileStations = join( '/', $dirConfig, 'stations.txt' );
 open my $if, $fileStations or die "Cant open $fileStations: $!";

@@ -13,8 +13,8 @@ use Time::Local;
 system( 'pkill \'^ping$\'' );
 
 chomp(my $hostname = `hostname -s`);
-my $dirData = "../data";
-my $dirConfig = "../config";
+my $dirData = "../../data";
+my $dirConfig = "../../config";
 
 my $rightNow = timegm(gmtime);
 my ($year, $month, $day, $hour, $minute) = (gmtime($rightNow))[5,4,3,2,1];

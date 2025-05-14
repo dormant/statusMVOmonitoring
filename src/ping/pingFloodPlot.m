@@ -4,7 +4,7 @@ clear;
 
 setColours;
 setup = setupGlobals();
-dirData = fullfile( setup.DirHome, "STUFF/src/mvo/statusMVOmonitoring/data/pingFlood" );
+dirData = fullfile( setup.DirHome, "data/statusMVOmonitoring/data/pingFlood" );
 
 dinfo = dir(fullfile(dirData,'*.txt'));
 ntargets = length( dinfo );
