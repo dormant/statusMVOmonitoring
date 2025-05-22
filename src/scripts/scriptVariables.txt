@@ -1,0 +1,2 @@
+dirData="../data"
+dirConfig="../config"

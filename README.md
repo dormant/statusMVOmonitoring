@@ -1,5 +1,7 @@
 # statusMVOmonitoring
 
+## ~/data/statusMVOmonitoring
+
 Monitoring the MVO seismic data acquisition system.
 
 ## Description
@@ -19,7 +21,7 @@ The following subdirectories should be present on all the computers, but the con
 The following subdirectories are currently only on *opsproc3*.
 * reports
 * specificProblems
-* systemNotes
+* spreadsheets
 * tests
 
 The contents of *data* on all the computers are regularly synchronised one-way using rsync to */mnt/mvofls2/Seismic_Data/monitoring_data/status*.
@@ -140,6 +142,37 @@ $ pkill ping
 $ ./radianLogFilesCheckTime.pl > MBFL-noClock.txt
 ```
 * *MATLAB* script *radianLogFilesPlotTime.m* plots the results.
+
+## src/scripts
+
+Various scripts used ...
+
+## src/transferWget
+
+* Scripts to test and plot data transfer rates from stations using *wget*.
+* Results are stored in *data/transferWget*.
+* Run once an hour as a cron job on *opsproc3*.
+```
+10 * * * * cd /home/seisan/data/statusMVOmonitoring/src/transferWget; ./transferWget.pl >/dev/null 2>&1; rm init.log*
+15 * * * * cd /home/seisan/data/statusMVOmonitoring/src/transferWget; ./transferWgetMerge.sh >/dev/null 2>&1
+```
+
+## spreadsheets/systemNotes.xlsx
+
+This spreadsheet notes any problems with stations, computers and infrastructure involved in seismic monitoring at MVO. 
+
+* Dates and times are recorded using the *yyyymmdd-hhmm* format.
+* Outages less than one hour are not included.
+* There is one sheet for each station.
+* Things that affect the whole system, or non-station assets, are recorded in the *System* sheet.
+* Changes made in data-acquisition software are recorded in the *Actions* sheet.
+* Information is extracted from this spreadsheet once an hour by a cronjob on *opsproc3*. 
+```
+54 * * * * /home/seisan/data/statusMVOmonitoring/src/scripts/systemNotesExtract.pl > /home/seisan/data/statusMVOmonitoring/reports/systemNotesExtract/currentProblems.txt
+55 * * * * /home/seisan/data/statusMVOmonitoring/src/scripts/systemNotesExtract.pl all > /home/seisan/data/statusMVOmonitoring/reports/systemNotesExtract/allProblemsByStation.txt
+56 * * * * /home/seisan/data/statusMVOmonitoring/src/scripts/systemNotesExtract.pl chron > /home/seisan/data/statusMVOmonitoring/reports/systemNotesExtract/allProblemsChronologically.txt
+```
+
 
 ## Author
 
